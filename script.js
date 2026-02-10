@@ -43,35 +43,24 @@ function moveButtonAway(e, forced = false) {
   if (!forced && now - lastMoveTime < 1200) return;
 
   const btnRect = italyButton.getBoundingClientRect();
-  const centerX = btnRect.left + btnRect.width / 2;
-  const centerY = btnRect.top + btnRect.height / 2;
-
-  const distance = e
-    ? Math.hypot(e.clientX - centerX, e.clientY - centerY)
-    : 0;
-
-  if (!forced && distance > 90) return;
+  const btnWidth = btnRect.width;
+  const btnHeight = btnRect.height;
 
   lastMoveTime = now;
 
-  const padding = 80;
-  const maxX = window.innerWidth - btnRect.width - padding;
-  const maxY = window.innerHeight - btnRect.height - padding;
+  const padding = 20; // keep button away from edges
+  const maxX = window.innerWidth - btnWidth - padding;
+  const maxY = window.innerHeight - btnHeight - padding;
 
-  let randomX, randomY;
-
-  do {
-    randomX = Math.random() * maxX * noSpeed;
-    randomY = Math.random() * maxY * noSpeed;
-  } while (
-    Math.abs(randomX - nepalButton.offsetLeft) < 120 &&
-    Math.abs(randomY - nepalButton.offsetTop) < 80
-  );
+  // Random position within visible screen only
+  const randomX = padding + Math.random() * maxX;
+  const randomY = padding + Math.random() * maxY;
 
   italyButton.style.position = "fixed";
   italyButton.style.left = randomX + "px";
   italyButton.style.top = randomY + "px";
 }
+
 
 // ---------------- NEPAL BUTTON ----------------
 nepalButton.addEventListener("click", () => {
