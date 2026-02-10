@@ -1,7 +1,7 @@
 // ---------------- VARIABLES ----------------
 let messageIndex = 0;
 let lastMoveTime = 0;
-let noSpeed = 1;
+const noSpeed = 1;
 
 // Nepali comedy slang for choosing Italy 😆
 const messages = [
@@ -20,14 +20,20 @@ const messages = [
 const italyButton = document.querySelector(".italy-button");
 const nepalButton = document.querySelector(".nepal-button");
 
+if (!italyButton || !nepalButton) {
+  console.error("Buttons not found in DOM");
+}
+
 // ---------------- ITALY BUTTON ----------------
 function handleItalyClick(e) {
   italyButton.textContent = messages[messageIndex];
   messageIndex = (messageIndex + 1) % messages.length;
 
-  // Grow Nepal button (crowd pressure 😏)
-  const currentSize = parseFloat(window.getComputedStyle(nepalButton).fontSize);
-  nepalButton.style.fontSize = `${currentSize * 1.35}px`;
+  // Grow Nepal button (peer pressure 😏)
+  const currentSize = parseFloat(
+    window.getComputedStyle(nepalButton).fontSize
+  );
+  nepalButton.style.fontSize = `${currentSize * 1.3}px`;
 
   moveButtonAway(e, true);
 }
@@ -44,20 +50,27 @@ function moveButtonAway(e, forced = false) {
     ? Math.hypot(e.clientX - centerX, e.clientY - centerY)
     : 0;
 
-  if (!forced && distance > 80) return;
+  if (!forced && distance > 90) return;
 
   lastMoveTime = now;
 
-  const padding = 60;
+  const padding = 80;
   const maxX = window.innerWidth - btnRect.width - padding;
   const maxY = window.innerHeight - btnRect.height - padding;
 
-  const randomX = Math.random() * maxX * noSpeed;
-  const randomY = Math.random() * maxY * noSpeed;
+  let randomX, randomY;
+
+  do {
+    randomX = Math.random() * maxX * noSpeed;
+    randomY = Math.random() * maxY * noSpeed;
+  } while (
+    Math.abs(randomX - nepalButton.offsetLeft) < 120 &&
+    Math.abs(randomY - nepalButton.offsetTop) < 80
+  );
 
   italyButton.style.position = "fixed";
-  italyButton.style.left = Math.min(randomX, maxX) + "px";
-  italyButton.style.top = Math.min(randomY, maxY) + "px";
+  italyButton.style.left = randomX + "px";
+  italyButton.style.top = randomY + "px";
 }
 
 // ---------------- NEPAL BUTTON ----------------
@@ -71,21 +84,20 @@ nepalButton.addEventListener("click", () => {
 // ---------------- CELEBRATION ----------------
 function createCelebration() {
   for (let i = 0; i < 40; i++) {
-    const flag = document.createElement("div");
-    flag.className = "celebrate";
-    flag.textContent = "🇳🇵";
+    const el = document.createElement("div");
+    el.className = "celebrate";
+    el.textContent = "🇳🇵";
 
-    const x = (Math.random() - 0.5) * 700 + "px";
-    const y = (Math.random() - 0.5) * 700 + "px";
+    el.style.setProperty("--x", (Math.random() - 0.5) * 700 + "px");
+    el.style.setProperty("--y", (Math.random() - 0.5) * 700 + "px");
 
-    flag.style.setProperty("--x", x);
-    flag.style.setProperty("--y", y);
-
-    document.body.appendChild(flag);
-    setTimeout(() => flag.remove(), 1100);
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 1100);
   }
 }
 
 // ---------------- EVENT LISTENERS ----------------
 italyButton.addEventListener("click", handleItalyClick);
-document.addEventListener("mousemove", moveButtonAway);
+
+// Only trigger run-away when hovering Italy button (smoother UX)
+italyButton.addEventListener("mousemove", moveButtonAway);
