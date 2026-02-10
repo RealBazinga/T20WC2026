@@ -6,14 +6,8 @@ const noSpeed = 1;
 // Nepali comedy slang for choosing Italy 😆
 const messages = [
   "Italy re? Eh bhai seriously? 😂",
-  "Yo ta direct penalty ho hai 🇳🇵😤",
-  "Italy click garyo bhane momo jharera jancha 😭",
-  "Gorkhali le yo dekhera ris uthcha 🔥",
-  "Bro, T20 ho pizza league haina 🍕❌",
   "Italy lai vote? Aama le tharkauncha 😭",
-  "Nepal chodera Italy? Galat track gayo 🚫",
-  "Yo button ta bhagera hidna parcha 🏃‍♂️",
-  "Last warning: Nepal nai ho 🇳🇵👊"
+  "Nepal chodera Italy? Galat track gayo 🚫"
 ];
 
 // Buttons
