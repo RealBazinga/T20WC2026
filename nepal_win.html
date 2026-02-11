@@ -108,8 +108,10 @@
 
 <body>
 
-  <h1> 🇳🇵 🇳🇵 🇳🇵 NEPAL WINS! 🇳🇵 🇳🇵 🇳🇵</h1>
-  <h2>T20 World Cup 2026 · Group Stage</h2>
+  <h1> 🇳🇵 🇳🇵 Lets Go! NEPAL 🇳🇵 🇳🇵</h1>
+  <!--<h1> 🇳🇵 🇳🇵 NEPAL WINS! 🇳🇵 🇳🇵</h1>-->
+  <h2>Aba Khelchau Babal! 🇳🇵</h2>
+  <h3>T20 World Cup 2026 · Group Stage</h3>
 
   <div class="video-container">
     <iframe width="612" height="353" src="https://www.youtube.com/embed/jh0BZdS8kKg" title="𝐂𝐨𝐥𝐨𝐫𝐬 𝐨𝐟 𝐍𝐞𝐩𝐚𝐥 – 𝐀𝐫𝐨𝐡𝐚𝐧 | 𝐍𝐞𝐩𝐚𝐥 𝐂𝐫𝐢𝐜𝐤𝐞𝐭 𝐀𝐧𝐭𝐡𝐞𝐦 | 𝐆𝐞𝐧𝐞𝐬𝐢𝐬 × 𝐉𝐚𝐧𝐚𝐤𝐩𝐮𝐫 𝐁𝐨𝐥𝐭𝐬" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -118,30 +120,6 @@
   <!-- Background music -->
   <audio id="bgMusic" src="music.mp3" loop></audio>
 
-  <script>
-    // Start music safely after interaction
-    document.body.addEventListener("click", () => {
-      const music = document.getElementById("bgMusic");
-      if (music && music.paused) music.play();
-    }, { once: true });
-
-    // 🇳🇵 Celebration burst
-    function celebrateNepal() {
-      for (let i = 0; i < 50; i++) {
-        const el = document.createElement("div");
-        el.className = "celebrate";
-        el.textContent = "🇳🇵";
-
-        el.style.setProperty("--x", (Math.random() - 0.5) * 900 + "px");
-        el.style.setProperty("--y", (Math.random() - 0.5) * 900 + "px");
-
-        document.body.appendChild(el);
-        setTimeout(() => el.remove(), 1300);
-      }
-    }
-
-    celebrateNepal();
-  </script>
-
+ <script src="nepal_script.js"></script>
 </body>
 </html>

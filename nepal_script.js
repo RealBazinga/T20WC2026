@@ -1,21 +1,35 @@
 // ---------------- BACKGROUND MUSIC ----------------
 const bgMusic = document.getElementById("bgMusic");
 bgMusic.volume = 0.4;
-let musicStarted = false;
 
-function startMusic() {
-  if (!musicStarted) {
+// Play music once after first interaction (safe autoplay)
+document.body.addEventListener("click", () => {
+  if (bgMusic && bgMusic.paused) {
     bgMusic.play().catch(() => console.log("Autoplay blocked"));
-    musicStarted = true;
+  }
+}, { once: true });
+
+
+// ---------------- 🇳🇵 BIG CELEBRATION BURST ----------------
+function celebrateNepal() {
+  for (let i = 0; i < 50; i++) {
+    const el = document.createElement("div");
+    el.className = "celebrate";
+    el.textContent = "🇳🇵";
+
+    el.style.setProperty("--x", (Math.random() - 0.5) * 900 + "px");
+    el.style.setProperty("--y", (Math.random() - 0.5) * 900 + "px");
+
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 1300);
   }
 }
 
-// Start music on first interaction
-document.addEventListener("click", startMusic, { once: true });
-document.addEventListener("mousemove", startMusic, { once: true });
+// Trigger burst once on load
+celebrateNepal();
 
-// ---------------- CELEBRATION EFFECT ----------------
-// Nepal-themed emojis
+
+// ---------------- CONTINUOUS CELEBRATION EFFECT ----------------
 const celebrationEmojis = ["🇳🇵", "🏏", "🔥", "🌟", "🎉"];
 
 function createCelebration() {
@@ -24,33 +38,27 @@ function createCelebration() {
   el.textContent =
     celebrationEmojis[Math.floor(Math.random() * celebrationEmojis.length)];
 
-  // Start near bottom with slight random X
   const startX = Math.random() * window.innerWidth;
   const startY = window.innerHeight + 20;
 
   el.style.left = startX + "px";
   el.style.top = startY + "px";
 
-  // Animate to random position upwards
   el.style.setProperty("--x", (Math.random() - 0.5) * 600 + "px");
   el.style.setProperty("--y", -(Math.random() * 700 + 300) + "px");
 
-  // Slight random size
   el.style.fontSize = `${24 + Math.random() * 18}px`;
-
-  // Slight rotation for fun
   el.style.transform = `rotate(${Math.random() * 40 - 20}deg)`;
 
   document.body.appendChild(el);
 
-  // Remove after animation
   setTimeout(() => el.remove(), 1800);
 }
 
-// Burst at page load
+// Initial wave
 for (let i = 0; i < 35; i++) {
   setTimeout(createCelebration, i * 35);
 }
 
-// Continuous light celebration
+// Light continuous floating celebration
 setInterval(createCelebration, 400);
