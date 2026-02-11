@@ -60,7 +60,7 @@ function moveButtonAway(e, forced = false) {
 nepalButton.addEventListener("click", () => {
   createCelebration();
   setTimeout(() => {
-    window.location.href = "nepal_win.html";
+    window.location.href = "team_nepal.html";
   }, 900);
 });
 
